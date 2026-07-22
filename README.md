@@ -18,7 +18,7 @@ Lekki, modułowy bot do monitorowania platform ogłoszeniowych (Vinted) w czasie
 ## ⚙️ Uruchomienie projektu
 1. Sklonuj repozytorium:
    ```bash
-   git clone [https://github.com/8B4art3ek/dealhunter.git](https://github.com/8B4art3ek/dealhunter.git)
+   git clone https://github.com/8B4art3ek/dealhunter.git
    cd dealhunter
 1. Skonfiguruj plik środowiskowy `.env` w głównym katalogu:
    ```env
