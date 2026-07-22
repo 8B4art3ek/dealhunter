@@ -13,9 +13,9 @@ class DealHunterApp:
         self.providers = providers
         self.notifier = notifier
 
-    def hunt(self, query: str) -> None:
-        logger.info(f"Rozpoczynam wyszukiwanie dla: {query}")
+    def hunt(self, query: str, max_price: float = None) -> None:
+        logger.info(f"Rozpoczynam wyszukiwanie dla: {query} {max_price}zł")
         for provider in self.providers:
-            deals = provider.search(query)
+            deals = provider.search(query, max_price)
             for deal in deals:
                 self.notifier.send(deal)
