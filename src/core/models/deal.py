@@ -8,4 +8,5 @@ class Deal:
     price: float
     url: str
     source: str
+    condition: str
     created_at: datetime = field(default_factory=datetime.now)
