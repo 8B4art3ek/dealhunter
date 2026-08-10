@@ -13,8 +13,16 @@ class DiscordNotifier(NotificationService):
         self.webhook_url = webhook_url
 
     def send(self, deal: Deal) -> None:
-        content = f"🔥 **Nowy Deal!** 🔥\n**{deal.title}**\nStan: {deal.condition}\nCena: {deal.price} zł\n[Link do oferty]({deal.url})"
-        payload = {"content": content}
+        embed = {
+            "title": deal.title,
+            "url": deal.url,
+            "color": 5814783,
+            "fields": [{"name": "Cena", "value": f"{deal.price} zł", "inline": True}, {"name": "Stan", "value": deal.condition, "inline": True}],
+        }
+
+        if deal.image_url:
+            embed["thumbnail"] = {"url": deal.image_url}
+        payload = {"embeds": [embed]}
         response = requests.post(self.webhook_url, json=payload)
 
         if response.status_code == 204:

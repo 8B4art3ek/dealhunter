@@ -10,3 +10,4 @@ class Deal:
     source: str
     condition: str
     created_at: datetime = field(default_factory=datetime.now)
+    image_url: str | None = None

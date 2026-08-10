@@ -21,7 +21,7 @@ if __name__ == "__main__":
         exit(1)
     init_db()
     my_notifier = DiscordNotifier(webhook_url=discord_webhook)
-    my_criteria = SearchCriteria(query="Nike Tech Fleece", max_price=80.0, limit=20)
+    my_criteria = SearchCriteria(query="adidas", max_price=80.0, limit=5)
 
     app = DealHunterApp(providers=[my_provider], notifier=my_notifier)
     app.hunt(my_criteria)

@@ -62,6 +62,7 @@ class VintedProvider(MarketplaceProvider):
                 url=item.get("url", ""),
                 source="vinted",
                 condition=item.get("status", "Nieznany"),
+                image_url=item.get("photo", {}).get("url"),
             )
             deals.append(deal)
         return deals
