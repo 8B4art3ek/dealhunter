@@ -1,5 +1,6 @@
 import logging
 
+from src.core.models.search import SearchCriteria
 from src.marketplaces.base.provider import MarketplaceProvider
 from src.notifications.base.notifier import NotificationService
 
@@ -7,15 +8,13 @@ logger = logging.getLogger(__name__)
 
 
 class DealHunterApp:
-    def __init__(
-        self, providers: list[MarketplaceProvider], notifier: NotificationService
-    ):
+    def __init__(self, providers: list[MarketplaceProvider], notifier: NotificationService):
         self.providers = providers
         self.notifier = notifier
 
-    def hunt(self, query: str, max_price: float = None) -> None:
-        logger.info(f"Rozpoczynam wyszukiwanie dla: {query} {max_price}zł")
+    def hunt(self, criteria: SearchCriteria) -> None:
+        logger.info(f"Rozpoczynam wyszukiwanie dla: {criteria.query} {criteria.max_price}zł")
         for provider in self.providers:
-            deals = provider.search(query, max_price)
+            deals = provider.search(criteria)
             for deal in deals:
                 self.notifier.send(deal)
