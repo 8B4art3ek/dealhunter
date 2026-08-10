@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 
 from src.core.app import DealHunterApp
+from src.core.database import init_db
 from src.core.models.search import SearchCriteria
 from src.marketplaces.vinted import VintedProvider
 from src.notifications.discord import DiscordNotifier
@@ -18,8 +19,9 @@ if __name__ == "__main__":
     if not discord_webhook:
         logger.error("Brak linku do webhooka! Sprawdź plik .env")
         exit(1)
+    init_db()
     my_notifier = DiscordNotifier(webhook_url=discord_webhook)
-    my_criteria = SearchCriteria(query="Nike Tech Fleece", max_price=80.0, limit=5)
+    my_criteria = SearchCriteria(query="Nike Tech Fleece", max_price=80.0, limit=20)
 
     app = DealHunterApp(providers=[my_provider], notifier=my_notifier)
     app.hunt(my_criteria)
